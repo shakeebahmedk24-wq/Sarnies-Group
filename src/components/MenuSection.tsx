@@ -201,10 +201,10 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
           )}
         </motion.div>
 
-        {/* Menu Items Grid with Animated Transitions */}
+        {/* Menu Items Grid with Animated Transitions - 2 columns parallel on mobile */}
         <motion.div
           layout
-          className="mt-6 sm:mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+          className="mt-6 sm:mt-8 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6"
         >
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item, index) => {
@@ -217,20 +217,20 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.94 }}
                   transition={{ duration: 0.3, delay: Math.min(index * 0.04, 0.3) }}
-                  className="group bg-stone-900/60 hover:bg-stone-900 border border-stone-800/80 hover:border-stone-700/90 rounded-lg overflow-hidden transition-colors duration-300 flex flex-col justify-between shadow-xl"
+                  className="group bg-stone-900/60 hover:bg-stone-900 border border-stone-800/80 hover:border-stone-700/90 rounded-lg sm:rounded-xl overflow-hidden transition-colors duration-300 flex flex-col justify-between shadow-xl"
                 >
                   {/* Dish Thumbnail */}
                   {item.image && (
-                    <div className="relative aspect-[16/10] overflow-hidden bg-stone-950">
+                    <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-stone-950">
                       <img
                         src={item.image}
                         alt={item.name}
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent opacity-80" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-transparent to-transparent opacity-80" />
                       {item.popular && (
-                        <span className="absolute top-2.5 right-2.5 bg-[#c97a3e] text-[#121110] text-[9px] sm:text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded shadow">
+                        <span className="absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 bg-[#c97a3e] text-[#121110] text-[8px] sm:text-[10px] font-black uppercase tracking-wider px-1.5 py-0.5 sm:px-2 rounded shadow">
                           Popular
                         </span>
                       )}
@@ -238,59 +238,59 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                   )}
 
                   {/* Item Content */}
-                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
+                  <div className="p-2.5 sm:p-5 flex-1 flex flex-col justify-between space-y-2 sm:space-y-3">
                     <div>
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-display text-sm sm:text-base font-bold text-stone-100 group-hover:text-[#c97a3e] transition-colors leading-snug">
+                      <div className="flex items-start justify-between gap-1.5 sm:gap-2">
+                        <h3 className="font-display text-xs sm:text-base font-bold text-stone-100 group-hover:text-[#c97a3e] transition-colors leading-snug line-clamp-2">
                           {item.name}
                         </h3>
-                        <span className="text-xs sm:text-sm font-bold text-[#e69354] font-mono whitespace-nowrap bg-stone-950 px-2 py-0.5 rounded border border-stone-800">
+                        <span className="text-[11px] sm:text-sm font-bold text-[#e69354] font-mono whitespace-nowrap bg-stone-950 px-1.5 py-0.5 sm:px-2 rounded border border-stone-800 shrink-0">
                           ฿{item.price}
                         </span>
                       </div>
 
-                      <p className="mt-1.5 text-[11px] sm:text-xs text-stone-400 leading-relaxed font-light">
+                      <p className="mt-1 sm:mt-1.5 text-[10px] sm:text-xs text-stone-400 leading-relaxed font-light line-clamp-2 sm:line-clamp-3">
                         {item.description}
                       </p>
                     </div>
 
                     {/* Ordering Action Buttons on Every Card */}
-                    <div className="pt-3 border-t border-stone-800/80 flex items-center justify-between gap-2">
+                    <div className="pt-2 sm:pt-3 border-t border-stone-800/80 flex items-center justify-between gap-1 sm:gap-2">
                       {item.tags && item.tags.length > 0 ? (
-                        <span className="text-[10px] text-stone-500 font-medium truncate max-w-[140px]">
+                        <span className="text-[9px] sm:text-[10px] text-stone-500 font-medium truncate max-w-[60px] sm:max-w-[140px] hidden xs:inline sm:inline">
                           {item.tags[0]}
                         </span>
                       ) : (
-                        <span />
+                        <span className="hidden xs:inline" />
                       )}
 
                       {qty > 0 ? (
-                        <div className="flex items-center bg-stone-950 border border-[#c97a3e]/50 rounded overflow-hidden">
+                        <div className="flex items-center bg-stone-950 border border-[#c97a3e]/50 rounded overflow-hidden w-full xs:w-auto justify-between xs:justify-start">
                           <button
                             onClick={() => onUpdateQuantity(item.id, -1)}
-                            className="px-2 py-1 text-stone-400 hover:text-white hover:bg-stone-800 transition-colors cursor-pointer"
+                            className="px-1.5 py-0.5 sm:px-2 sm:py-1 text-stone-400 hover:text-white hover:bg-stone-800 transition-colors cursor-pointer"
                             title="Decrease quantity"
                           >
-                            <Minus className="w-3 h-3" />
+                            <Minus className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                           </button>
-                          <span className="px-2 text-xs font-bold text-[#e69354] font-mono">
+                          <span className="px-1.5 sm:px-2 text-[11px] sm:text-xs font-bold text-[#e69354] font-mono">
                             {qty}
                           </span>
                           <button
                             onClick={() => onUpdateQuantity(item.id, 1)}
-                            className="px-2 py-1 text-stone-400 hover:text-white hover:bg-stone-800 transition-colors cursor-pointer"
+                            className="px-1.5 py-0.5 sm:px-2 sm:py-1 text-stone-400 hover:text-white hover:bg-stone-800 transition-colors cursor-pointer"
                             title="Increase quantity"
                           >
-                            <Plus className="w-3 h-3" />
+                            <Plus className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                           </button>
                         </div>
                       ) : (
                         <button
                           onClick={() => onAddToCart(item)}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-stone-800 hover:bg-[#c97a3e] text-stone-200 hover:text-[#121110] rounded text-[11px] font-bold uppercase tracking-wider transition-colors border border-stone-700 hover:border-[#c97a3e] cursor-pointer"
+                          className="w-full xs:w-auto inline-flex items-center justify-center gap-1 sm:gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 bg-stone-800 hover:bg-[#c97a3e] text-stone-200 hover:text-[#121110] rounded text-[10px] sm:text-[11px] font-bold uppercase tracking-wider transition-colors border border-stone-700 hover:border-[#c97a3e] cursor-pointer"
                         >
-                          <Plus className="w-3 h-3" />
-                          <span>Add to Order</span>
+                          <Plus className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" />
+                          <span className="truncate">Add<span className="hidden sm:inline"> to Order</span></span>
                         </button>
                       )}
                     </div>
