@@ -1,0 +1,8 @@
+{
+  "name": " Sarnies Bangkok",
+  "description": "Chill, industrial-style outpost offering all-day brunch, Australian-Asian fusion fare \u0026 specialty coffee in historic Charoen Krung, Bangkok.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
